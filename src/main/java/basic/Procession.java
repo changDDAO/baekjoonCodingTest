@@ -28,12 +28,20 @@ public class Procession {
                 arrayB[i][j] = s.charAt(j) - '0';
             }
         }
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                System.out.print(arrayA[i][j]);
+        int cnt = 0;
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = 0; j < m-2; j++) {
+                if (arrayA[i][j] != arrayB[i][j]) {
+                    change(i,j);
+                    cnt++;
+                }
+
             }
-            System.out.println();
         }
+        if(isSame(arrayA,arrayB)) System.out.println(cnt);
+        else System.out.println(-1);
+
+
     }
     public static void change(int x, int y) {
         for (int i = x; i <= x + 2; i++) {
@@ -41,5 +49,14 @@ public class Procession {
                 arrayA[i][j] = 1 - arrayA[i][j];
             }
         }
+    }
+    public  static boolean isSame(int[][] arrayA, int[][]arrayB) {
+        for (int i = 0; i < arrayA.length; i++) {
+            for (int j = 0; j < arrayA[0].length; j++) {
+                if(arrayA[i][j]!=arrayB[i][j])
+                    return false;
+            }
+        }
+        return true;
     }
 }
