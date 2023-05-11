@@ -6,41 +6,31 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class Baek2798 {
-    public static int target;
-    public static int result;
-    public static int [] refArr;
-    public static int [] sumArr = new int[3];
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = br.readLine();
-        String[] temp = s.split(" ");
-        int N = Integer.parseInt(temp[0]);
-        target = Integer.parseInt(temp[1]);
-        s = br.readLine();
-        int[] numArr = Arrays.stream(s.split(" ")).mapToInt(Integer::parseInt).toArray();
-        refArr = numArr;
-        dfs(0,0,target);
-        System.out.println(result);
+ //dfs를 이용하여 문제를 풀었으나 2개의 합산이 500일때가있어 BruteForce 알고리즘으로 다시풀이 진행
+ public static void main(String[] args) throws IOException {
+     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+     String s = br.readLine();
+     String[] temp = s.split(" ");
+     int N = Integer.parseInt(temp[0]);
+     int target = Integer.parseInt(temp[1]);
+     s = br.readLine();
+     int[] numArr = Arrays.stream(s.split(" ")).mapToInt(Integer::parseInt).toArray();
+     int result=0;
+     for (int i = 0; i < numArr.length - 2; i++) {
+         for (int j = i + 1; j < numArr.length - 1; j++) {
+             for (int k = j + 1; k < numArr.length; k++) {
+                 int sum = numArr[i] + numArr[j] + numArr[k];
+                 if(sum==target){ System.out.println(sum);
+                    return;
+                 }
 
+                 if(result<sum&&sum<target)
+                    result = sum;
+             }
+         }
+     }
+     System.out.println(result);
 
-    }
-    public static void dfs(int index, int depth, int target) {
-        if (depth == 3) {
-            int sum =0;
+ }
 
-            for (int i = 0; i < 3; i++) {
-                sum+=sumArr[i];
-                if(sum>=target)return;
-            }
-            if(sum<=target)
-            result = Math.max(result, sum);
-
-
-            return;
-        }
-        for (int i = index; i < refArr.length; i++) {
-            sumArr[depth]= refArr[i];
-            dfs(index+1,depth+1,target);
-        }
-    }
 }
