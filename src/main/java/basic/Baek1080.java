@@ -1,12 +1,9 @@
 package basic;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Procession {
+public class Baek1080 {
     public static int [][] arrayA;
     public static void main(String[] args) throws IOException {
 
