@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+//dfs와 bfs를 같이 사용하여 solve하기 좋은문제
 public class Baek14502 {
     public static int[][] refMap;
     public static int [][] srcMap;
