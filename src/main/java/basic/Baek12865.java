@@ -16,21 +16,16 @@ public class Baek12865 {
         N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
         dpTable = new int[K + 1];
-        for (int i = 0; i < N; i++) {
-            //dp 초기화하기
-             st = new StringTokenizer(br.readLine());
-            int weight = Integer.parseInt(st.nextToken());
-            int happyPoint = Integer.parseInt(st.nextToken());
-            if(weight<K)dpTable[weight]=happyPoint;
+        int[] weight = new int[N + 1];
+        int[] worth = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
+            st = new StringTokenizer(br.readLine());
+            weight[i] = Integer.parseInt(st.nextToken());
+            worth[i] = Integer.parseInt(st.nextToken());
         }
-        for (int i = 1; i <= K; i++) {
-            int sum = 0;
-            for (int j = i + 1; j <= K; j++) {
-                sum = i+j;
-                if (sum <= K && dpTable[K] < dpTable[i] + dpTable[j]) {
-                    dpTable[K]=dpTable[i] + dpTable[j];
-                }
-
+        for (int i = 1; i <= N; i++) {
+            for (int j = K; j-weight[i]>=0; j--) {
+                dpTable[j] = Math.max(dpTable[j], dpTable[j - weight[i]] + worth[i]);
             }
             }
         System.out.println(dpTable[K]);
