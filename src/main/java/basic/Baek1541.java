@@ -31,7 +31,7 @@ public class Baek1541 {
                     .sum();
             nums.add(lastNum);
         }
-        Collections.sort(nums);
+
 
             int answer =nums.get(0);
             for (int i = 1; i < nums.size(); i++) {
