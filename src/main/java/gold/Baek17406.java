@@ -38,7 +38,8 @@ public class Baek17406 {
             rotation[i][1] = Integer.parseInt(st.nextToken());
             rotation[i][2] = Integer.parseInt(st.nextToken());
         }
-
+        findAllCase(0,k);
+        System.out.println(min);
     }
     static void rowMin(int[][] copyMap) {
         for (int i = 0; i < copyMap.length; i++) {
@@ -49,6 +50,16 @@ public class Baek17406 {
             min = Math.min(min, sum);
         }
     }
+    static void findMin(int[][]copyMap) {
+        for (int i = 0; i < order.length; i++) {
+            int lx = rotation[order[i]][0]-rotation[order[i]][2]-1;
+            int ly = rotation[order[i]][1]-rotation[order[i]][2]-1;
+            int rx = rotation[order[i]][0]+rotation[order[i]][2]-1;
+            int ry = rotation[order[i]][1]+rotation[order[i]][2]-1;
+            rotate(lx,ly,rx,ry,copyMap);
+        }
+        rowMin(copyMap);
+    }
     static void findAllCase(int cnt, int k) {
         if (cnt == k) {
             int[][] oneCase = new int[n][m];
@@ -57,7 +68,16 @@ public class Baek17406 {
                     oneCase[i][j] = srcMap[i][j];
                 }
             }
-
+            findMin(oneCase);
+            return;
+        }
+        for (int i = 0; i < k; i++) {
+            if (!visited[i]) {
+                visited[i]=true;
+                order[cnt]=i;
+                findAllCase(cnt+1,k);
+                visited[i]=false;
+            }
 
         }
     }
