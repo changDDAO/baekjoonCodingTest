@@ -6,9 +6,10 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Baek17406 {
-    static int[][] srcMap;
-    static int [][] rotation;
+    static int[][] srcMap;//원본배열
+    static int [][] rotation;// 회전방법을 담을배열
     static int n, m, k;
+    static int min = Integer.MAX_VALUE;
     static boolean [] visited;
     static int [] order;
     //test
@@ -20,7 +21,45 @@ public class Baek17406 {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
+        srcMap = new int[n][m];
+        rotation = new int[k][3];
+        visited = new boolean[k];
+        order = new int[k];
 
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < m; j++) {
+                srcMap[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+        for (int i = 0; i < k; i++) {
+            st = new StringTokenizer(br.readLine());
+            rotation[i][0] = Integer.parseInt(st.nextToken());
+            rotation[i][1] = Integer.parseInt(st.nextToken());
+            rotation[i][2] = Integer.parseInt(st.nextToken());
+        }
+
+    }
+    static void rowMin(int[][] copyMap) {
+        for (int i = 0; i < copyMap.length; i++) {
+            int sum =0;
+            for (int j = 0; j < copyMap[0].length; j++) {
+                sum+=copyMap[i][j];
+            }
+            min = Math.min(min, sum);
+        }
+    }
+    static void findAllCase(int cnt, int k) {
+        if (cnt == k) {
+            int[][] oneCase = new int[n][m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    oneCase[i][j] = srcMap[i][j];
+                }
+            }
+
+
+        }
     }
     static void rotate(int lx, int ly, int rx, int ry, int[][]copyMap) {
         if(lx==rx&&ly==ry) return;//모든회전이 완료된 상황이므로 종료
@@ -35,10 +74,20 @@ public class Baek17406 {
         }
         //아래로 회전
         for (int i = rx; i > lx; i--) {
-            copyMap[i][ry]=copyMap[i-1][ry];
+            if(i==lx+1) copyMap[i][ry] = temp[0];
+            else copyMap[i][ry]=copyMap[i-1][ry];
         }
-
-
+        //왼쪽으로 회전
+        for (int i = ly; i < ry; i++) {
+            if(i==ry-1)copyMap[rx][i]=temp[1];
+            else copyMap[rx][i] = copyMap[rx][i + 1];
+        }
+        //위로 회전
+        for (int i = lx; i > rx; i++) {
+            if(i==rx-1)copyMap[i][ly]=temp[2];
+            else copyMap[i][ly]=copyMap[i+1][ly];
+        }
+        rotate(lx+1,ly+1,rx-1,ry-1,copyMap);
 
     }
 }
