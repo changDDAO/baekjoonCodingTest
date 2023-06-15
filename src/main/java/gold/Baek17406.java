@@ -11,6 +11,7 @@ public class Baek17406 {
     static int n, m, k;
     static boolean [] visited;
     static int [] order;
+    //test
     public static void main(String[] args) throws IOException {
         //구현문제는 생각보다 많은 내공을 필요로 한다. 가장 중요한부분은 조건을 빠짐없이
         //고려하며 구현을 시작해야한다. 모든조건을 고려하지않고 구현한다면 처음부터 새로 코드를 작성해야 할 수 있다.
