@@ -103,7 +103,7 @@ public class Baek17406 {
             else copyMap[rx][i] = copyMap[rx][i + 1];
         }
         //위로 회전
-        for (int i = lx; i > rx; i++) {
+        for (int i = lx; i < rx; i++) {
             if(i==rx-1)copyMap[i][ly]=temp[2];
             else copyMap[i][ly]=copyMap[i+1][ly];
         }
